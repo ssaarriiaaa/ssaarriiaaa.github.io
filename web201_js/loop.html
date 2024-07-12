@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- Loop: for, 2 for each, while, do while, forEach(function(ele, index, array){})
+ -->
+
+ <script>
+  for (let i=0; i<5; i++) {
+    document.write(i);
+  }
+
+  document.write('<br>');
+  
+  // for each
+  a=['abc','def','hij']
+  for (let e in a) {
+    document.write(e);
+  }
+  document.write('<br>');
+  for (let e of a) {
+    document.write(e," ");
+  }
+
+  // while
+
+  document.write('<br>');
+  // do while
+  let i=5;
+  do {
+    document.write('do something')
+    document.write('<br>');
+    i--;
+  } while (i>0);
+
+  // forEach
+  a.forEach(function(e){
+    document.write(e);
+    document.write('<br>');
+  });
+
+ </script>
+  
+</body>
+</html>

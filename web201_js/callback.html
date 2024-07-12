@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 'func' is callback function
+    // callback function is a function passed into another function
+    function f1(func) {
+      console.log('called function 1')
+      func();
+    }
+
+    function f2() {
+      console.log('called function 2');
+    }
+
+    f1(f2);
+
+  </script>
+  
+</body>
+</html>

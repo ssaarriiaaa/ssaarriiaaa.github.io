@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // we registed a listener for the event 'keydown' on the window object
+    window.addEventListener('keydown', function (e) {
+      console.log('you press',e.code)
+    });
+
+    window.addEventListener('keyup', function (e) {
+      console.log('you release',e.code)
+    });
+  </script>
+
+</body>
+
+</html>

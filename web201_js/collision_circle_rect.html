@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // events
+    canvas.addEventListener('mousemove',function(e){
+      let mx=e.offsetX;
+      let my=e.offsetY;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      circle.update(mx,my);
+      circle.draw();
+      rect.draw();
+
+      //
+      if (collisionOnTop(circle,rect)
+       || collisionOnLeft(circle,rect)
+       || collisionOnRight(circle,rect)
+        || collisionOnBottom(circle,rect)) {
+        rect.c='red';
+        rect.draw();
+      } else {
+          rect.c='blue';
+          rect.draw();
+      }
+    });
+
+    // functions
+    function collisionOnTop(circle,rect) {
+      return circle.x>=rect.x // left edge
+      && circle.x<=rect.x+rect.w // right edge
+      && circle.y+circle.r>=rect.y // hit on top
+      && circle.y+circle.r<=rect.y+rect.h; // bottom edge
+    }
+
+    function collisionOnLeft(circle,rect) {
+      return circle.x+circle.r>=rect.x 
+      && circle.y>=rect.y 
+      && circle.y<=rect.y+rect.h 
+      && circle.x+circle.r<rect.x+rect.w;
+    }
+
+    function collisionOnRight(circle,rect) {
+      return circle.x-circle.r<=rect.x+rect.w
+      && circle.y>=rect.y 
+      && circle.y<=rect.y+rect.h 
+      && circle.x-circle.r>rect.x;
+    }
+
+    function collisionOnBottom(circle,rect) {
+      return circle.x>=rect.x 
+      && circle.x<=rect.x+rect.w 
+      && circle.y-circle.r<=rect.y+rect.h 
+      && circle.y-circle.r>rect.y;
+    }
+
+    // circle
+        // object style
+      let circle = {
+      x: 200,
+      y: 150,
+      r: 50,
+      draw: function () {
+        color='red';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+      },
+      update: function(mx,my) {
+        this.x=mx;
+        this.y=my;
+      }
+    }
+    circle.draw();
+
+    // rect
+    rect = {
+      x:200,
+      y:200,
+      w:200,
+      h:100,
+      c:'blue',
+      draw: function(){
+        ctx.beginPath();
+        ctx.rect(this.x,this.y,this.w,this.h);
+        ctx.fillStyle=this.c;
+        ctx.fill();
+      }
+    }
+    rect.draw();
+
+  </script>
+
+</body>
+
+</html>

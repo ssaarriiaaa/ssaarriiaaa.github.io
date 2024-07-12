@@ -1,0 +1,137 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    let radius = 100;
+
+    ctx.arc(300,300,radius,0,Math.PI*2);
+    ctx.fill();
+
+    canvas.addEventListener('mousemove', function(e) {
+        console.log("mouse move", e.offsetX, e.offsetY)
+
+        if (e.offsetX>=200 && e.offsetX<=400 && e.offsetY>=200 && e.offsetY<=400) {
+            console.log("inside circle");
+            radius++;
+            ctx.beginPath();
+            ctx.arc(300,300,radius,0,Math.PI*2);
+            ctx.fill();
+        } else {
+            console.log("outside circle");
+            if(radius>100) radius--;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.beginPath();
+            ctx.arc(300,300,radius,0,Math.PI*2);
+            ctx.fill();
+        }
+    });
+  </script>
+
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // precedure style
+    // object style
+    let circle = {
+      x: 200,
+      y: 200,
+      r: 100,
+      draw: function () {
+        if (inCircle) {
+          color='red';
+        } else {
+          color='blue';
+        }
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+      },
+      update: function() {
+        if (inCircle) {
+          this.r++;
+        } else {
+          if (this.r>100) {
+            this.r--;
+          }
+        }
+      }
+    }
+
+    // register event
+    inCircle=false;
+    canvas.addEventListener('mousemove', function (e) {
+      let x = e.offsetX;
+      let y = e.offsetY;
+
+    // check if mouse pointer in the circle or not
+      if ((x - 200) ** 2 + (y - 200) ** 2 <= 100 ** 2) {
+        inCircle=true;
+      } else {
+        inCircle=false;
+      }
+    });
+
+    function loop() {
+      requestAnimationFrame(loop);
+      //
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      //
+      circle.draw();
+      //
+      circle.update();
+    }
+    loop();
+
+  </script>
+
+</body>
+
+</html>

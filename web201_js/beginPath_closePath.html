@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // path: rect, arc, line, text ......
+    ctx.moveTo(50,50);
+    ctx.lineTo(250,50);
+    ctx.lineTo(250,200);
+    ctx.strokeStyle='black';
+    ctx.stroke();
+
+    // begin to collect path to a new list (subpaths)
+    ctx.beginPath();
+    ctx.moveTo(50,350); // start point
+    ctx.lineTo(250,350);
+    ctx.lineTo(250,450);
+    ctx.strokeStyle='red';
+    ctx.closePath();
+    ctx.stroke();
+
+    //
+    ctx.beginPath();
+    ctx.arc(400,200,50,0,Math.PI/2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(400,300,50,0,Math.PI/2);
+    ctx.fill();
+
+  </script>
+
+</body>
+
+</html>

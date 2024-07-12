@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=[1,2,3];
+
+        // properties
+        console.log(a.length);
+
+        // methods
+        a.push(4); // [1,2,3,4]
+        console.log(a);
+        a.pop(); // [1,2,3]
+        console.log(a);
+        a.pop(1); // [1,2], same as a.pop(), it ignores argument
+        console.log(a);
+        a.unshift(100); // [100,1,2]
+        console.log(a);
+        a.shift(); // [1,2]
+        console.log(a);
+
+        // remove element by index
+        // splice(index, howMany, add)
+        a.splice(1,1);
+
+        // create an array and fill with a number (for example 0)
+        b=new Array(10).fill(0);
+        console.log(b);
+
+        // read
+        c=["a","b","c"];
+        console.log(c[0]);
+        c[1]=200;
+        console.log(c);
+    </script>
+</body>
+</html>

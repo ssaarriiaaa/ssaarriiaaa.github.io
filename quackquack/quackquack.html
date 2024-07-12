@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+   
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quackquack</title>
+    <script src="quackquackJS.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: #d8cbaf;
+        }
+
+        @media all and (max-device-width: 1000px) {
+            #input {
+                position: fixed;
+                bottom: 45px;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 80%;
+                line-height: 25px;
+                padding-left: 5px;
+                padding-right: 5px;
+                background-color: #ebe6d9;
+                border: solid 3px #d8cbaf;
+                border-radius: 5px;
+            }
+            
+            #inputCover {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                display: flex;
+                flex-direction: column;
+                overflow: scroll;
+                height: 6%;
+                width: auto;
+                background-color: #ebe6d9;
+                padding: 15px;
+                margin: 20px;
+                border-radius: 5px;
+            }
+
+            #messages {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                display: flex;
+                flex-direction: column;
+                overflow: scroll;
+                height: 50vh;
+                width: auto;
+                background-color: #ebe6d9;
+                padding: 15px;
+                padding-bottom: 85px;
+                margin: 20px;
+                border-radius: 5px;
+            }
+            
+            .user, .duck span, .duck {
+                background-color: #ebe6d9;
+                color: #342c1d;
+                font-family: "Nunito", sans-serif;
+                font-size: 18px;
+/*                weight: 200 - 1000*/
+                font-weight: 500;
+                font-style: normal;
+            }
+            
+            #duckIMG {
+                display: block;
+                height: auto;
+                width: 55vw;
+                left: 0;
+                right: 0;
+                margin: auto;
+                margin-top: 20px;
+            }
+        }
+
+        
+        @media all and (min-device-width: 1000px) {
+            #input {
+                position: fixed;
+                bottom: 45px;
+                width: 35%;
+                line-height: 25px;
+                padding-left: 5px;
+                padding-right: 5px;
+                background-color: #ebe6d9;
+                border: solid 3px #d8cbaf;
+                border-radius: 5px;
+            }
+            
+            #inputCover {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                display: flex;
+                justify-content: center;
+                height: 6%;
+                width: 40%;
+                background-color: #ebe6d9;
+                padding: 15px;
+                margin: 20px;
+                border-radius: 5px;
+            }
+
+            #messages {
+                position: fixed;
+                bottom: 0;
+                top: 0;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                overflow: scroll;
+                height: auto;
+                width: 40vw;
+                background-color: #ebe6d9;
+                padding: 15px;
+                padding-bottom: 85px;
+                margin: 20px;
+                border-radius: 5px;
+            }
+            
+            .user, .duck span, .duck {
+                background-color: #ebe6d9;
+                color: #342c1d;
+                font-family: "Nunito", sans-serif;
+                font-size: 1em;
+/*                weight: 200 - 1000*/
+                font-weight: 500;
+                font-style: normal;
+            }
+            
+            #duckIMG {
+                display: block;
+                height: auto;
+                width: 44vw;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 5vw;
+                
+                position: absolute;
+                top: 50%;
+                transform: translate(0%, -50%); /* center vertically */
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <img id="duckIMG" src=default_duck.png alt="duck!">
+    
+    <div id="messages">
+        <div id="inputCover">
+            <input id="input" type="text" placeholder="quack quack?" autocomplete="off" autofocus="true">
+        </div>
+    </div>
+</body></html>

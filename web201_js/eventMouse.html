@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.addEventListener('mouseover', function(e) {
+        console.log("event target:",e.target)
+        console.log("mouse over")
+    });
+    
+    canvas.addEventListener('mouseout', function(e) {
+        console.log("mouse out")
+    });
+    
+    canvas.addEventListener('mouseleave', function(e) {
+        console.log("mouse leave")
+    });
+
+    canvas.addEventListener('click', function(e) {
+        console.log("mouse click")
+    });
+
+    canvas.addEventListener('dblclick', function(e) {
+        console.log("mouse double click")
+    });
+
+    canvas.addEventListener('wheel', function(e) {
+        console.log("mouse wheel")
+    });
+
+    canvas.addEventListener('mousemove', function(e) {
+        console.log("mouse move")
+    });
+
+  </script>
+
+</body>
+
+</html>

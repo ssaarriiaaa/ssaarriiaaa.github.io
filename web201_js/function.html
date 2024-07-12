@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function add(a,b) {
+            return a+b;
+        }
+
+        // call function
+        c=add(100, 200);
+        console.log(c);
+
+        // javascript doesn't tell you errors
+        c=add(100);
+        console.log(c); // returns NaN - not a number
+
+        c=add(100, 200, 500); // additional parameters autio ignored
+        console.log(c);
+
+        // auto invoke
+        a=(function minus(a, b) {
+            return a-b;
+        })(3,100);
+        // ^^^ can run functions without name by wrapping it in brackets
+        console.log(a);
+
+    </script> 
+</body>
+</html>

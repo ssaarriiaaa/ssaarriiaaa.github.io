@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 4px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+        // javascript auto create object from html tag which have id
+
+        // console.dir(canvas);
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        // outline
+        // x, y, width, height
+        ctx.fillRect(100, 50, 200, 100);
+        //
+        ctx.rect(100, 200, 200, 100);
+        ctx.fillStyle='red';
+        ctx.fill();
+    </script>
+</body>
+</html>
