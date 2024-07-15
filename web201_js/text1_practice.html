@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 4px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        ctx.font="20px monospace";
+        ctx.fillStyle="red";
+
+        ctx.textBaseline="top";
+        ctx.fillText("Hello",0,0);
+
+        ctx.textAlign="center";
+        ctx.fillText("Hello",300,0);
+
+        ctx.textAlign="right";
+        ctx.fillText("Hello",600,0);
+
+        ctx.textBaseline="middle";
+        ctx.fillText("Hello",600,300);
+
+        ctx.textBaseline="bottom";
+        ctx.fillText("Hello",600,600);
+
+        ctx.textAlign="center";
+        ctx.fillText("Hello",300,600);
+
+        ctx.textAlign="left";
+        ctx.fillText("Hello",0,600);
+
+        ctx.textBaseline="middle";
+        ctx.fillText("Hello",0,300)
+
+
+    </script>
+</body>
+</html>
