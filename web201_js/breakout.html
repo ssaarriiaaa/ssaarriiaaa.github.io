@@ -95,14 +95,14 @@
       },
 
       update: function() {
-        if (collisionOnTop(ball,this)
-            || collisionOnLeft(ball,this)
-            || collisionOnRight(ball,this)
-            || collisionOnBottom(ball,this)) {
-              this.exist=false;
-              // blocks[this.r].splice(this.c,1);
-              // ball.dy=-ball.dy;
-            }
+        // if (collisionOnTop(ball,this)
+        //     || collisionOnLeft(ball,this)
+        //     || collisionOnRight(ball,this)
+        //     || collisionOnBottom(ball,this)) {
+        //       this.exist=false;
+        //       // blocks[this.r].splice(this.c,1);
+        //       // ball.dy*=-1;
+        //     }
       }
     }
     
@@ -122,7 +122,9 @@
       }
       return blocks;
     }
-    let blocks = createBlocks(3,5);
+    let rows = 3;
+    let cols = 5;
+    let blocks = createBlocks(rows,cols);
     console.log(blocks);
 
     // paddle
@@ -151,6 +153,8 @@
     paddle.draw();
 
     
+    let score=0;
+
 
     // ball
     let maxAngle=160;
@@ -172,15 +176,29 @@
       update: function() {
         this.x+=this.dx;
         this.y-=this.dy;
+
+        // ball hitting blocks
+        for (let r=0; r<rows; r++) {
+          for (let c=0; c<cols; c++) {
+            if (blocks[r][c].exist && collisionOnTop(this,blocks[r][c])
+            || collisionOnLeft(this,blocks[r][c])
+            || collisionOnRight(this,blocks[r][c])
+            || collisionOnBottom(this,blocks[r][c])) {
+              blocks[r][c].exist=false;
+              this.dy*=-1;
+              score+=10;
+            }
+          }
+        }
         
         // ball hitting sides of the canvas
         if (ball.x > canvas.width-ball.r || ball.x < 15) {
-          this.dx=-this.dx;
+          this.dx*=-1;
         }
 
         // ball hitting top or bottom of canvas
         if (ball.y > canvas.height-ball.r || ball.y < 15) {
-          this.dy=-this.dy
+          this.dy*=-1;
         }
 
         // ball hitting paddle
@@ -200,7 +218,6 @@
     ball.draw();
 
     let pause=false;
-    let score = 0;
     // game loop
     function loop() {
       requestAnimationFrame(loop);
@@ -220,13 +237,13 @@
       ball.draw();
 
       // update
-      ball.update();
-      paddle.update();
       blocks.forEach(row => {
         row.forEach(block => {
           block.update();
         });
       });
+      ball.update();
+      paddle.update();
     }
 
     loop();
