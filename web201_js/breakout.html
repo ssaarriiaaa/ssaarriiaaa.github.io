@@ -26,7 +26,6 @@
 
     // audio
     let audioBounce=new Audio("./bounce.mp3");
-
     audioBounce.addEventListener('loadedmetadata', function(){
     });
     function play(audio) {
@@ -34,6 +33,10 @@
       let a=audio.cloneNode();
       a.play();
     }
+
+    let img = new Image();
+    img.src="breakout_bg.avif";
+    
 
     // events
     let left=null;
@@ -237,7 +240,6 @@
       }
     }
 
-    // ball.update();
     ball.draw();
     paddle.draw();
     drawText("Score: "+score,5,5,"blue");
@@ -246,12 +248,16 @@
           block.draw();
         });
       });
+    // img.addEventListener("load",function(){
+    //         ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
+    //     });
+    
 
     ctx.font="30px monospace";
     ctx.textBaseline="middle";
     ctx.textAlign="center";
     ctx.fillStyle="red";
-    ctx.fillText("Press [SPACE] to start", 300, 300)
+    ctx.fillText("PRESS [SPACE] TO START", 300, 300)
 
     // game loop
     function loop() {
@@ -262,7 +268,8 @@
       ctx.clearRect(0,0,canvas.width,canvas.height);
 
       // draw
-      drawText("Score: "+score,5,5,"blue");
+      ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
+      drawText("SCORE: "+score,5,5,"blue");
       blocks.forEach(row => {
         row.forEach(block => {
           block.draw();

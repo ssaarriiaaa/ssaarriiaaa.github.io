@@ -13,6 +13,10 @@
         // img.width=300;
         // img.height=600;
         document.body.appendChild(img);
+
+        img.addEventListener("load",function(){
+            console.log("loaded image");
+        });
     </script>
 </body>
 </html>
