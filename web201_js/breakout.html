@@ -9,16 +9,34 @@
     canvas {
       border: solid 10px #66ba66;
     }
+
+    #background {
+      position: absolute;
+    }
+
+    #canvas {
+      position: absolute;
+    }
   </style>
 </head>
 
 <body>
+  <canvas id='background' width=600 height=600></canvas>
   <canvas id='canvas' width=600 height=600></canvas>
 
   <script>
-    var canvas = document.querySelector('canvas');
-    var ctx = canvas.getContext('2d');
+    // draw background
+    var bgCanvas=document.querySelector("#background");
+    var c=bgCanvas.getContext("2d");
+    let bg = new Image();
+    bg.src="breakout_bg.avif";
+    bg.addEventListener("load", function(){
+      c.drawImage(bg,0,0,bg.width/5.04,bg.height/5.04)
+    })
 
+    // draw game
+    var canvas = document.querySelector('#canvas');
+    var ctx = canvas.getContext('2d');
 
     let score=0;
     let pause=true;
@@ -33,10 +51,6 @@
       let a=audio.cloneNode();
       a.play();
     }
-
-    let img = new Image();
-    img.src="breakout_bg.avif";
-    
 
     // events
     let left=null;
@@ -240,8 +254,6 @@
       }
     }
 
-    img.addEventListener("load",function(){
-      ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
       ball.draw();
       paddle.draw();
       ctx.font="30px monospace";
@@ -255,10 +267,6 @@
             block.draw();
           });
         });
-    });
-    
-    
-    
 
     // game loop
     function loop() {
@@ -269,7 +277,6 @@
       ctx.clearRect(0,0,canvas.width,canvas.height);
 
       // draw
-      ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
       drawText("SCORE: "+score,5,5,"blue");
       blocks.forEach(row => {
         row.forEach(block => {
