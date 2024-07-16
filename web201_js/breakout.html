@@ -241,22 +241,24 @@
     }
 
     img.addEventListener("load",function(){
-            ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
+      ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
+      ball.draw();
+      paddle.draw();
+      ctx.font="30px monospace";
+      ctx.textBaseline="middle";
+      ctx.textAlign="center";
+      ctx.fillStyle="red";
+      ctx.fillText("PRESS [SPACE] TO START", 300, 300)
+      drawText("Score: "+score,5,5,"blue");
+        blocks.forEach(row => {
+          row.forEach(block => {
+            block.draw();
+          });
         });
-    ball.draw();
-    paddle.draw();
-    drawText("Score: "+score,5,5,"blue");
-      blocks.forEach(row => {
-        row.forEach(block => {
-          block.draw();
-        });
-      });
+    });
     
-    ctx.font="30px monospace";
-    ctx.textBaseline="middle";
-    ctx.textAlign="center";
-    ctx.fillStyle="red";
-    ctx.fillText("PRESS [SPACE] TO START", 300, 300)
+    
+    
 
     // game loop
     function loop() {
