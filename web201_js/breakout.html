@@ -240,6 +240,9 @@
       }
     }
 
+    img.addEventListener("load",function(){
+            ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
+        });
     ball.draw();
     paddle.draw();
     drawText("Score: "+score,5,5,"blue");
@@ -248,11 +251,7 @@
           block.draw();
         });
       });
-    // img.addEventListener("load",function(){
-    //         ctx.drawImage(img,0,0,img.width/5.04,img.height/5.04);
-    //     });
     
-
     ctx.font="30px monospace";
     ctx.textBaseline="middle";
     ctx.textAlign="center";
