@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 4px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        let x=200;
+        ctx.moveTo(x,0);
+        ctx.lineTo(x, 500);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(x,50,5,0,Math.PI*2);
+        ctx.fillStyle="red";
+        ctx.fill();
+
+        // horizontal position
+        ctx.textAlign="left";
+        ctx.font="40px monospace";
+        ctx.strokeText("Hello",x,50);
+
+        ctx.textAlign="center";
+        ctx.font="40px monospace";
+        ctx.fillText("Hello",x,100);
+
+        ctx.textAlign="right";
+        ctx.font="40px monospace";
+        ctx.fillText("Hello",x,150);
+
+
+        ///
+        let y=300;
+        ctx.moveTo(0,y);
+        ctx.lineTo(600,y);
+        ctx.stroke();
+
+        // vertical position
+        ctx.textBaseline="baseline";
+        ctx.textAlign="left";
+        ctx.fillText("Hello",0,y);
+
+        ctx.textBaseline="top";
+        ctx.textAlign="left";
+        ctx.fillText("Hello",150,y);
+
+        ctx.arc(300,y,5,0,Math.PI*2);
+        ctx.fill();
+        ctx.textBaseline="middle";
+        ctx.fillText("song",350,y);
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <audio id="audio" controls src="./miracle_2-ilya_truhanov.mp3"></audio> -->
+
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+        pause.addEventListener("click", function(e){
+            audio.pause();
+        })
+
+        play.addEventListener("click", function(e){
+            processSound();
+        })
+
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        // 1st way
+        // let audio=document.querySelector('#audio');
+
+        // 2nd way
+        function processSound() {
+            let audio = new Audio("./miracle_2-ilya_truhanov.mp3");
+            
+            // metadata is a data that describes other data
+            audio.addEventListener("loadedmetadata",function(){
+                console.log('loaded');
+                audio.play();
+                audio.volume=0.1;
+
+                ctx.font="30px monospace";
+                fresh(audio.src,50,50);
+                frash(audio.duration,50,100);
+            });
+
+            audio.addEventListener("play", function(){
+                fresh("Playing",50,150);
+            });
+
+            audio.addEventListener("pause", function(){
+                fresh("Paused",50,200);
+            });
+
+            audio.addEventListener("volumechange",function(){
+                fresh(audio.volume,50,250);
+            });
+            
+            audio.addEventListener("ended",function(){
+                fresh("Ended",50,300);
+            });
+
+            audio.addEventListener("timeupdate",function(){
+                fresh(audio.currentTime,50,350);
+            });
+
+            function fresh(text,x,y) {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillText(text,x,y);
+            }
+        }
+
+    </script>
+</body>
+</html>
