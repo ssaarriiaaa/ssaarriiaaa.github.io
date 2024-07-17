@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        let g=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+        g.addColorStop(0,"white");
+        g.addColorStop(1,"black");
+
+        // use gradient
+        ctx.fillStyle=g;
+        ctx.rect(0,0,canvas.width,canvas.height);
+        ctx.fill();
+
+
+        // radial gradient
+        let rg=ctx.createRadialGradient(100,100,50,100,100,200);
+        ctx.beginPath();
+        rg.addColorStop(0,"white");
+        rg.addColorStop(1,"blue");
+        ctx.fillStyle=rg;
+        ctx.rect(0,0,200,200);
+        ctx.fill();
+    </script>
+</body>
+</html>
