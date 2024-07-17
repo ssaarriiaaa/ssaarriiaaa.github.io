@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 10px;
+        }
+
+        img {
+            border: solid red 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">take screenshot</button>
+
+    <canvas id="canvas" width="600" height="200"></canvas>
+
+    <script>
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        let btn=document.querySelector("#btn");
+        btn.addEventListener("click", function(e){
+            // get pixels from canvas
+            let screenshot=canvas.toDataURL();
+
+            //
+            let img=new Image();
+            img.src=screenshot;
+
+            // insert image to document
+            document.body.appendChild(img);
+        });
+
+        let x=0;
+        let y=100;
+        setInterval(function(){
+            // 1 clear
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            // 2 draw
+            ctx.beginPath();
+            ctx.fillStyle="red";
+            ctx.fillRect(x,y,50,50);
+            ctx.fill();
+
+            // 3 update
+            x++;
+        },100);
+    </script>
+</body>
+</html>
