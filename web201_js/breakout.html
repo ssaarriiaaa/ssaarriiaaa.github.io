@@ -66,6 +66,12 @@
         if (!gameOver){
           pause=!pause;
         }
+        if (gameOver){
+          gameOver=false;
+          pause=false;
+          paddle.init();
+          ball.init();
+        }
       }
     });
 
@@ -167,6 +173,11 @@
       w: 160,
       h: 20,
       dx: 5,
+      init: function() {
+        this.x=canvas.width / 2 - this.w/2;
+        this.y=canvas.height - this.h;
+      },
+
       draw: function() {
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.w, this.h);
@@ -191,9 +202,15 @@
       x: canvas.width/2,
       y: canvas.height-paddle.h-15,
       r: 15,
-      dx: 0,
-      dy: 10,
+      dx: 2, // delta x
+      dy: -8,
       
+      init: function() {
+        this.x=canvas.width/2;
+        this.y=canvas.height-paddle.h-15;
+        this.dx=0;
+        this.dy=-8;
+      },
 
       draw: function () {
         let ballg= ctx.createRadialGradient(this.x,this.y,this.r/3,this.x,this.y,this.r);
@@ -240,11 +257,11 @@
           this.dy*=-1;
           pause=true;
           gameOver=true;
-          ctx.font="30px monospace";
+          ctx.font="25px monospace";
           ctx.textBaseline="middle";
           ctx.textAlign="center";
           ctx.fillStyle="red";
-          ctx.fillText("GAME OVER", 300, 300)
+          ctx.fillText("GAME OVER! PRESS [SPACE] TO RESTART", 300, 300)
         }
 
         // ball hitting paddle
@@ -264,7 +281,7 @@
 
       ball.draw();
       paddle.draw();
-      ctx.font="30px monospace";
+      ctx.font="25px monospace";
       ctx.textBaseline="middle";
       ctx.textAlign="center";
       ctx.fillStyle="red";
