@@ -132,7 +132,7 @@
 
       draw: function() {
         if (!this.exist) return;
-        let blockg=ctx.createLinearGradient(this.x,this.y,this.w,this.h);
+        let blockg=ctx.createLinearGradient(this.x,this.y,this.x+this.w,this.y+this.h);
         blockg.addColorStop(0,"white");
         blockg.addColorStop(1,"blue");
         ctx.beginPath();
@@ -213,10 +213,10 @@
       },
 
       draw: function () {
-        let ballg= ctx.createRadialGradient(this.x,this.y,this.r/3,this.x,this.y,this.r);
+        let ballg= ctx.createRadialGradient(this.x-5,this.y-5,this.r/8,this.x-5,this.y-5,this.r);
         ctx.beginPath();
-        ballg.addColorStop(0,"black");
-        ballg.addColorStop(1,"blue");
+        ballg.addColorStop(0,"white");
+        ballg.addColorStop(1,"black");
         ctx.fillStyle = ballg;
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
         ctx.fill();
