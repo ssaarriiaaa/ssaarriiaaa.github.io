@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid green 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        ctx.rect(50,50,200,100);
+        ctx.lineWidth=20;
+        ctx.strokeStyle="red";
+        ctx.stroke();
+        
+        ctx.fillStyle="blue";
+        ctx.fill();
+    </script> 
+</body>
+</html>

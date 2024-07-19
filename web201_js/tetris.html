@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: solid deepskyblue 10px;
+        }
+
+        #score, #scoreLabel{
+            font-weight: bolder;
+            font-size: 40px;
+        }
+
+        #canvas, #score {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="300" height="600"></canvas>
+    <label id="scoreLabel" for="score">Score: </label>
+    <span id="score">0</span>
+
+    <script>
+        let canvas=document.querySelector('#canvas');
+        let ctx=canvas.getContext('2d');
+
+        square = {
+            x: 0,
+            y: 0,
+            w: 30,
+            h: 30,
+            draw: function(row,col){
+                ctx.beginPath();
+                ctx.rect(this.x+col*this.w,this.y+row*this.h,this.w,this.h);
+                ctx.strokeStyle="black";
+                ctx.stroke();
+            }
+        }
+
+        square.draw(1,0);
+
+    </script> 
+</body>
+</html>
