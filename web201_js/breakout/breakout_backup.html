@@ -24,7 +24,7 @@
   <canvas id='background' width=600 height=600></canvas>
   <canvas id='canvas' width=600 height=600></canvas>
 
-  <script>
+  <script src="breakout.js" type="module">
     // draw background
     var bgCanvas=document.querySelector("#background");
     var c=bgCanvas.getContext("2d");
@@ -37,10 +37,6 @@
     // draw game
     var canvas = document.querySelector('#canvas');
     var ctx = canvas.getContext('2d');
-
-    let score=0;
-    let pause=true;
-    let gameOver=false;
 
     // audio
     let audioBounce=new Audio("./bounce.mp3");
@@ -74,6 +70,22 @@
         }
       }
     });
+
+
+
+
+    // game
+    game = {
+      score: 0,
+      pause: true,
+      gameOver: false,
+      level: 1,
+      maxLevel: 3,
+      youWin: false,
+    }
+
+
+
 
     function collisionOnTop(circle,rect) {
       return circle.x>=rect.x // left edge
@@ -161,7 +173,7 @@
       }
       return blocks;
     }
-    let rows = 3;
+    let rows = 1;
     let cols = 5;
     let blocks = createBlocks(rows,cols);
     console.log(blocks);
@@ -353,4 +365,4 @@
         
     </script> 
 </body>
-</html> -->
+</html>  -->
