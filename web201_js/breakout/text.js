@@ -1,3 +1,6 @@
+import {ctx} from "./background.js"
+
+
 function drawText(num,text,x,y,color) {
     if (num===1) {
         ctx.beginPath();

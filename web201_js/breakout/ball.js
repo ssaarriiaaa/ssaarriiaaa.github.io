@@ -1,10 +1,10 @@
-import {canvas, ctx} from "background.js"
-import {audioBounce, play} from "audio.js"
-import {collisionOnTop, collisionOnLeft, collisionOnRight, collisionOnBottom} from "collision.js";
-import {drawText} from "text.js";
-import {rows, cols, blocks} from "blocks.js";
-import {paddle} from "paddle.js";
-import {score, pause, gameOver, level, maxLevel, youWin} from "breakout.js"
+import {canvas, ctx} from "./background.js"
+import {audioBounce, play} from "./audio.js"
+import {collisionOnTop, collisionOnLeft, collisionOnRight, collisionOnBottom} from "./collision.js";
+import {drawText} from "./text.js";
+import {rows, cols, blocks} from "./blocks.js";
+import {paddle} from "./paddle.js";
+import {score, pause, gameOver, level, maxLevel, youWin} from "./breakout.js"
 
 let maxAngle=160;
 let minAngle=20;
@@ -24,44 +24,42 @@ let ball = {
     },
 
     draw: function () {
-    let ballg= ctx.createRadialGradient(this.x-5,this.y-5,this.r/8,this.x-5,this.y-5,this.r);
-    ctx.beginPath();
-    ballg.addColorStop(0,"white");
-    ballg.addColorStop(1,"black");
-    ctx.fillStyle = ballg;
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fill();
+        let ballg= ctx.createRadialGradient(this.x-5,this.y-5,this.r/8,this.x-5,this.y-5,this.r);
+        ctx.beginPath();
+        ballg.addColorStop(0,"white");
+        ballg.addColorStop(1,"black");
+        ctx.fillStyle = ballg;
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
     },
     update: function() {
-    this.x+=this.dx;
-    this.y-=this.dy;
+        this.x+=this.dx;
+        this.y-=this.dy;
 
-    // ball hitting blocks
-    for (let r=0; r<rows; r++) {
-        for (let c=0; c<cols; c++) {
-        if (blocks[r][c].exist && (collisionOnTop(this,blocks[r][c])
-        || collisionOnLeft(this,blocks[r][c])
-        || collisionOnRight(this,blocks[r][c])
-        || collisionOnBottom(this,blocks[r][c]))) {
-            blocks[r][c].exist=false;
-            this.dy*=-1;
-            play(audioBounce);
+        // ball hitting blocks
+        for (let r=0; r<rows; r++) {
+            for (let c=0; c<cols; c++) {
+            if (blocks[r][c].exist && (collisionOnTop(this,blocks[r][c])
+            || collisionOnLeft(this,blocks[r][c])
+            || collisionOnRight(this,blocks[r][c])
+            || collisionOnBottom(this,blocks[r][c]))) {
+                blocks[r][c].exist=false;
+                this.dy*=-1;
+                play(audioBounce);
 
-            score+=10;
-            numOfBlocks--;
-            if (numOfBlocks===0) {
-                level++;
+                score+=10;
+                numOfBlocks--;
+                if (numOfBlocks===0) {
+                    level++;
 
-                if (level > maxLevel) {
-                    youWin=true;
-                    drawText(2, "YOU WIN! PRESS [SPACE] TO RESTART", 300, 300, "red")
+                    if (level > maxLevel) {
+                        youWin=true;
+                        drawText(2, "YOU WIN! PRESS [SPACE] TO RESTART", 300, 300, "red")
+                    }
+                    
+                    gameInit();
                 }
-
-                gameInit();
             }
-
-            
-        }
         }
     }
     

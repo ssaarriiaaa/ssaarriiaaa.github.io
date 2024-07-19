@@ -1,9 +1,9 @@
-import {c, bg, canvas, ctx} from "background.js"
-import {audioBounce, play} from "audio.js"
-import {drawText} from "text.js";
-import {createBlocks, rows, cols, numOfBlocks, blocks} from "blocks.js";
-import {paddle} from "paddle.js";
-import {ball} from "ball.js";
+import {c, bg, canvas, ctx} from "./background.js"
+import {audioBounce} from "./audio.js"
+import {drawText} from "./text.js";
+import {createBlocks, rows, cols, numOfBlocks, blocks} from "./blocks.js";
+import {paddle} from "./paddle.js";
+import {ball} from "./ball.js";
 
 let score=0;
 let pause=true;
@@ -78,7 +78,7 @@ ball.draw();
 paddle.draw();
 drawText(2, "PRESS [SPACE] TO START", 300, 300, "red")
 drawText(1, "Score: "+score, 5, 5, "blue");
-drawTewt(1, "Level: "+level, 50, 5, "blue");
+drawText(1, "Level: "+level, 150, 5, "blue");
 blocks.forEach(row => {
     row.forEach(block => {
     block.draw();
@@ -94,8 +94,8 @@ function loop() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     // draw
-    drawText("SCORE: "+score,5,5,"blue");
-    drawTewt(1, "Level: "+level, 50, 5, "blue");
+    drawText(1, "SCORE: "+score,5,5,"blue");
+    drawText(1, "Level: "+level, 150, 5, "blue");
     blocks.forEach(row => {
       row.forEach(block => {
         block.draw();

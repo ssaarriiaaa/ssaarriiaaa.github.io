@@ -1,4 +1,4 @@
-import {ctx} from "background.js"
+import {ctx} from "./background.js"
 
 let block = {
   x: 200,
@@ -16,6 +16,9 @@ let block = {
     ctx.fillStyle=blockg;
     ctx.rect(this.x,this.y,this.w,this.h);
     ctx.fill();
+  },
+
+  update: function() {
   }
 }
   

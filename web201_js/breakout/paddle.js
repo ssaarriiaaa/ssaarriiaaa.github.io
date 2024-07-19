@@ -1,5 +1,5 @@
-import {canvas, ctx} from "background.js"
-import {left, right} from "breakout.js";
+import {canvas, ctx} from "./background.js"
+import {left, right} from "./breakout.js";
 
 let paddle = {
     x: canvas.width / 2 - 80,
