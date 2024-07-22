@@ -24,25 +24,43 @@
     <label id="scoreLabel" for="score">Score: </label>
     <span id="score">0</span>
 
-    <script src="patterns.js"></script>
+    <script src="tetris/patterns.js"></script>
     <script>
         let canvas=document.querySelector('#canvas');
         let ctx=canvas.getContext('2d');
+
+        // events
+        window.addEventListener("keydown", function(e){
+            if (e.code==="ArrowLeft") {
+                currTetromino.moveLeft();
+            } else if (e.code==="ArrowRight") {
+                currTetromino.moveRight();
+            } else if (e.code==="ArrowDown") {
+                currTetromino.moveDown();
+            } else if (e.code==="KepP") {
+                pause=!pause;
+            }
+        })
 
         square = {
             x: 0,
             y: 0,
             w: 30,
             h: 30,
-            draw: function(row,col){
+            color: "white",
+            strokeColor: "black",
+            draw: function(){
                 ctx.beginPath();
-                ctx.rect(this.x+col*this.w,this.y+row*this.h,this.w,this.h);
-                ctx.strokeStyle="black";
+                ctx.rect(this.x,this.y,this.w,this.h);
+                ctx.strokeStyle=this.strokeColor;
                 ctx.stroke();
+
+                ctx.fillStyle=this.color;
+                ctx.fill();
             }
         }
 
-        square.draw(1,0);
+        // square.draw(1,0);
 
 
         // board
@@ -73,7 +91,91 @@
             }
         }
 
-        board.draw();
+        // board.draw();
+
+        Tetromino=function(aShape,row,col) {
+            let tr=row;
+            let tc=col;
+            let shape=aShape;
+            let currInd=0;
+            let currPattern=shape.patterns[currInd];
+
+            function draw() {
+                for (let r=0; r<shape.size; r++) {
+                    for (let c=0; c<shape.size; c++) {
+                        // draw border
+                        let b={...square};
+                        b.x=tc*square.w;
+                        b.y=tr*square.h;
+                        b.w=square.w*shape.size;
+                        b.h=square.w*shape.size;
+                        b.color="transparent";
+                        d.strokeColor="red";
+                        b.draw();
+
+                        // convert tr,tc,r,c -> x,y
+                        if (currPattern[r][c] != 0){
+                            let s={...square};
+                            s.x=(tc+c)+square.w;
+                            s.y=(tr+r)+square.h;
+                            s.color=shape.color;
+                            s.draw();
+                        }
+                    }
+                }
+            }
+
+            function update() {
+                tr++;
+            }
+
+            return {
+                row:tr,
+                col:tc,
+                shape:shape,
+                draw:draw,
+                update:update,
+                moveLeft: function() {
+                    tc--;
+                },
+                moveRight: function() {
+                    tc++;
+                },
+                moveDown: function() {
+                    tr++;
+                }
+            }
+        }
+
+        // test
+        let currTetromino=Tetromino(Z,0,0);
+        // currTetromino.draw();
+        
+
+        //
+        let pre=null;
+        function loop() {
+            requestAnimationFrame(loop);
+
+            // set interval to 1 sec
+            let curr=Date.now();
+            if (curr-pre<1000) return;
+            pre=curr;
+
+            // clear
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+
+            // draw
+            board.draw();
+            currTetromino.draw();
+
+
+            // update
+            currTetromino.update();
+
+        }
+
+        loop();
 
     </script> 
 </body>

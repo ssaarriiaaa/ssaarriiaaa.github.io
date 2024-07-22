@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let pre=null;
+        function loop() {
+            requestAnimationFrame(loop);
+
+            // set interval to 1 sec
+            let curr=Date.now();
+            if (curr-pre<1000) return;
+            pre=curr;
+            //
+            console.log("hello");
+        }
+        loop();
+    </script>
+</body>
+</html>
