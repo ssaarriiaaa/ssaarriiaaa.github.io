@@ -150,6 +150,18 @@
         return true;
       }
 
+      function stamp() {
+        for (let r=0; r<shape.size; r++) {
+            for (let c=0; c<shape.size; c++) {
+                let rr=row+r;
+                let cc=col+c;
+                if(currPattern[r][c]!=0){
+                    board.squares[rr][cc].color=shape.color;
+                }
+            }
+        }
+      }
+
       return {
         getRow:function(){
             return row;
@@ -183,9 +195,12 @@
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 board.draw();
                 draw();
+            } else {
+                stamp();
             }
         },
-        inBoundary:inBoundary
+        inBoundary:inBoundary,
+        stamp:stamp
       }
     }
 

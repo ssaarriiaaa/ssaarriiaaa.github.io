@@ -180,4 +180,4 @@ const Z = {
 ]
 };
 
-tetriminos = [I, O, T, L, J, S, Z];
+tetrominos = [I, O, T, L, J, S, Z];
