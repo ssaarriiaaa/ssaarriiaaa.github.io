@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        a=['a','b','c','d'];
+
+        a.forEach(function(e,ind) {
+            console.log(e,ind);
+        });
+
+        let b=[
+            [1,2,3],
+            [4,5,6],
+            [7,8,9]
+        ]
+
+        b.forEach(function(row,rowInd) {
+            row.forEach(function(col,colInd) {
+                console.log(rowInd,colInd,col);
+            });
+        });
+    </script>
+</body>
+</html>
