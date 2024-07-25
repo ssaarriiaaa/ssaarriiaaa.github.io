@@ -30,6 +30,8 @@
     <script>
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext('2d');
+
+      let score=0;
   
       // events
       let pause = false;
@@ -236,6 +238,9 @@
                 square.color="white";
               });
               board.squares.unshift(removedRow);
+
+              score+=10;
+              document.getElementById("score").innerHTML = score;
             }
           });
         }
