@@ -7,10 +7,26 @@
 </head>
 <body>
     <script>
-        // 5 object-like type: number, string, boolean, null, undefined
-        // all others are objects: Object, array, function
+        // 5 object-like: number, string, boolean, null, undefined
+        // others are all object: for example: Object, array, function
 
+        // object-like vs object
+        n=100;
+        n.abc=100;
+        n.def=function(){
+        return 3000;
+        }
+        console.log(n.abc);
+        console.log(n.def);
 
+        //
+        a=[1,2,3];
+        a.abc=1000;
+        a.def=function(){
+        return 2000;
+        }
+        console.log(a.abc);
+        console.log(a.def());
     </script>
 </body>
 </html>

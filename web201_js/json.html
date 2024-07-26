@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- web game, web animation, job
+     data analysis, data visualization (viz) -->
+    <script>
+        // an object
+        info = {
+            numOfWords: 100,
+            encode: "UTF-8"
+        }
+
+        // json (javascript object notation) object
+        jsonObject=JSON.stringify(info);
+        console.log(jsonObject);
+
+        // all keys are string
+        infoInJSON = {
+            "numOfWords": 100, 
+            "encode": "UTF-8"
+        }
+
+
+        // jason => object
+        info=JSON.parse(infoInJSON);
+        console.log(info);
+
+    </script>
+</body>
+</html>

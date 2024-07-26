@@ -30,8 +30,6 @@
     <script>
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext('2d');
-
-      let score = 0;
   
       // events
       let pause = false;
@@ -49,8 +47,7 @@
         } else if (e.code==='KeyS') {
           gameover=false;
           // reset
-          score=0;
-          document.getElementById("score").innerHTML=score;
+          score.innerText=0;
           currTetromino=Tetromino(tetrominos.getNext(),-3,3);
           board.reset();
         }
@@ -124,8 +121,7 @@
                 removedRow[ i ].color = 'white';
               }
               // increment score
-              score+=10;
-              document.getElementById("score").innerHTML=score;
+              score.innerText= +score.innerText + 10;
               // insert
               this.squares.unshift(removedRow);
             }
@@ -193,22 +189,44 @@
         }
   
         function rotate() {
+          // backup state 1
           let currIndBak = currInd;
           let currPatternBak = currPattern;
-          // 
+          let colBak=col;
+          // generate state 2 
           currInd++;
           if (currInd == shape.patterns.length) {
             currInd = 0;
           }
           currPattern = shape.patterns[ currInd ];
-          // check if pattern valid
+  
+          // check if in boundary
           if (inBoundary() && !collision()) {
-  
+            // keep the state 2 
           } else {
-            currInd = currIndBak;
-            currPattern = currPatternBak;
+            // try to adjust
+            for (let r=0; r<shape.size; r++){
+              for (let c=0; c<shape.size; c++) {
+                if (currPattern[r][c]!==0) {
+                  let cc=c+col;
+                  if (cc<0) { // the square out of left boundary
+                    // adjust to state 3
+                    col=col+Math.abs(cc)
+                  } else if (cc>9) { // out of right boundary
+                    // adjust to state 3
+                    col=col-(cc-9);
+                  }
+                }
+              }
+            }
+            // check if state 3 cause collision
+            if (collision()) {
+              // set back to state 1
+              currInd=currIndBak;
+              currPattern=currPatternBak;
+              col=colBak;
+            }
           }
-  
           // draw
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           board.draw();
@@ -240,7 +258,7 @@
               let cc = (tetrominoCol != undefined ? tetrominoCol : col) + c;
               // square has color and in board
               // also square in board has color
-              if (currPattern[ r ][ c ] != 0 && rr >= 0 && board.squares[ rr ][ cc ].color !== 'white') {
+              if (currPattern[ r ][ c ] != 0 && (rr >= 0 && rr<20 && cc>=0 && cc<10)&& board.squares[ rr ][ cc ].color !== 'white') {
                 console.log('collision');
                 return true;
               }
@@ -359,4 +377,4 @@
   
   </body>
   
-  </html>
+  </html>  

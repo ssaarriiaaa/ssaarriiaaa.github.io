@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // create object
+        person={
+            name: "Jason",
+            age: 40,
+            getAge: function() {
+                return this.age;
+            }
+        }
+
+        // create clone object
+        personClone={...person};
+        personClone.name="Fred";
+        personClone.age="50";
+
+        // constructor
+        function Person(name,age) {
+            this.name=name;
+            this.age=age;
+            this.getAge=function() {
+                return this.age;
+            }
+            return this;
+        }
+
+        jason=new Person("Jason", 40);
+        fred=new Person("Fred", 50);
+        console.log(jason);
+        console.log(fred);
+        console.log(fred.getAge());
+
+        // constructor is a function
+        // by convention, constructor name is capitalized
+
+        // why capitalized? to tell programmers this is constructor
+        // you should use "new" keyword when creating object
+        alice=Person("Alice", 40); // causes side effect
+        console.log("alice:", alice);
+        // side effect
+        // 1. alice is undefined
+        // 2. pollutes window object (global namespace)
+
+        cassi=new Person("Cassi",40);
+        console.log(cassi);
+
+        // what is "this" in constructor?
+        // "this" is an empty object ready to be assembled with data
+        
+
+
+    </script>
+</body>
+</html>
