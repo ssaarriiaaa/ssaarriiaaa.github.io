@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <input id='fileLoader' type="file">
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // 1 get selected file
+    fileLoader.addEventListener('change', function (e) {
+      // console.log('selected a file:');
+      console.log(e);
+      // console.log(e.target.value);
+      // console.log(e.target.files[ 0 ].name);
+      // console.log(e.target.files[ 0 ]);
+      // console.log(fileLoader.files[ 0 ]);
+
+      // 2 read file
+      let fileReader = new FileReader();
+      fileReader.readAsDataURL(fileLoader.files[ 0 ]);
+      fileReader.addEventListener('load', function (e) {
+        // console.log('fileReader:');
+        // console.log(e);
+
+        let img=new Image();
+        img.src=fileReader.result;
+        img.addEventListener('load',function(e){
+          // 3 use file data
+          ctx.drawImage(img,0,0);
+        });
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

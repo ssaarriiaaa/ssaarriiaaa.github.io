@@ -1,34 +1,56 @@
 import {c, bg, canvas, ctx} from "./background.js"
 import {audioBounce} from "./audio.js"
 import {drawText} from "./text.js";
-import {createBlocks, rows, cols, numOfBlocks, blocks} from "./blocks.js";
+import {createBlocks} from "./blocks.js";
 import {paddle} from "./paddle.js";
 import {ball} from "./ball.js";
 
-let score=0;
-let pause=true;
-let gameOver=false;
-let level=1;
-let maxLevel=3;
-let youWin=false;
+// make blocks here so game object can be used
+let rows = 1;
+let cols = 5;
+// let numOfBlocks = rows*cols;
+let blocks = createBlocks(rows,cols);
 
-function gameInit() {
-    if (level===1) {
-        score=0;
+let game={
+    score: 0,
+    pause: true,
+    gameOver: false,
+    level: 1,
+    maxLevel: 3,
+    youWin: false,
+    nomOfBlocks: rows*cols,
+    gameInit: function() {
+        if (this.level===1) {
+            this.score=0;
+        }
+    
+        rows=this.level;
+        numOfBlocks = rows*cols;
+        blocks=createBlocks(rows,col);
+        ball.init();
+        paddle.init();
+    }
     }
 
-    rows=level;
-    numOfBlocks = rows*cols;
-    blocks=createBlocks(rows,col);
-    ball.init();
-    paddle.init();
-}
-
 // background and game
-bg.src="breakout_bg.avif";
-bg.addEventListener("load", function(){
-    c.drawImage(bg,0,0,bg.width/5.04,bg.height/5.04)
-})
+ // 1 get selected file
+ fileLoader.addEventListener('change', function (e) {
+    // 2 read file
+    let fileReader = new FileReader();
+    fileReader.readAsDataURL(fileLoader.files[ 0 ]);
+    fileReader.addEventListener('load', function (e) {
+      bg.src=fileReader.result;
+      bg.addEventListener('load',function(e){
+        c.drawImage(bg,0,0,600,600);
+      });
+    });
+  });
+
+// OLD BACKGROUND
+// bg.src="breakout_bg.avif";
+// bg.addEventListener("load", function(){
+//     c.drawImage(bg,0,0,bg.width/5.04,bg.height/5.04)
+// })
 
 // audio
 audioBounce.addEventListener('loadedmetadata', function(){
@@ -46,18 +68,18 @@ window.addEventListener('keydown', function(e){
     right=true;
     }
     else if (e.code==="Space") {
-    if (!gameOver){
-        pause=!pause;
+    if (!game.gameOver){
+        game.pause=!game.pause;
     }
-    if (gameOver){
-        gameOver=false;
-        pause=false;
+    if (game.gameOver){
+        game.gameOver=false;
+        game.pause=false;
         paddle.init();
         ball.init();
     }
-    if (youWin) {
-        youWin=false
-        pause=false;
+    if (game.youWin) {
+        game.youWin=false
+        game.pause=false;
         paddle.init();
         ball.init();
     }
@@ -77,8 +99,8 @@ window.addEventListener('keyup', function(e){
 ball.draw();
 paddle.draw();
 drawText(2, "PRESS [SPACE] TO START", 300, 300, "red")
-drawText(1, "Score: "+score, 5, 5, "blue");
-drawText(1, "Level: "+level, 150, 5, "blue");
+drawText(1, "SCORE: "+game.score, 5, 5, "blue");
+drawText(1, "LEVEL: "+game.level, 150, 5, "blue");
 blocks.forEach(row => {
     row.forEach(block => {
     block.draw();
@@ -88,14 +110,14 @@ blocks.forEach(row => {
 // game loop
 function loop() {
     requestAnimationFrame(loop);
-    if(pause) return;
+    if(game.pause) return;
     
     // clear
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     // draw
-    drawText(1, "SCORE: "+score,5,5,"blue");
-    drawText(1, "Level: "+level, 150, 5, "blue");
+    drawText(1, "SCORE: "+game.score,5,5,"blue");
+    drawText(1, "LEVEL: "+game.level, 150, 5, "blue");
     blocks.forEach(row => {
       row.forEach(block => {
         block.draw();
@@ -116,4 +138,4 @@ function loop() {
 
 loop();
 
-export {score, pause, gameOver, level, maxLevel, youWin, left, right};
+export {rows, cols, blocks, game, left, right};

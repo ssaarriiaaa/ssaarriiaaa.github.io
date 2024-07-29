@@ -2,9 +2,8 @@ import {canvas, ctx} from "./background.js"
 import {audioBounce, play} from "./audio.js"
 import {collisionOnTop, collisionOnLeft, collisionOnRight, collisionOnBottom} from "./collision.js";
 import {drawText} from "./text.js";
-import {rows, cols, blocks} from "./blocks.js";
 import {paddle} from "./paddle.js";
-import {score, pause, gameOver, level, maxLevel, youWin} from "./breakout.js"
+import {game, rows, cols, blocks} from "./breakout.js"
 
 let maxAngle=160;
 let minAngle=20;
@@ -47,17 +46,17 @@ let ball = {
                 this.dy*=-1;
                 play(audioBounce);
 
-                score+=10;
-                numOfBlocks--;
-                if (numOfBlocks===0) {
-                    level++;
+                game.score+=10;
+                game.numOfBlocks--;
+                if (game.numOfBlocks===0) {
+                    game.level++;
 
-                    if (level > maxLevel) {
-                        youWin=true;
+                    if (game.level > game.maxLevel) {
+                        game.youWin=true;
                         drawText(2, "YOU WIN! PRESS [SPACE] TO RESTART", 300, 300, "red")
                     }
                     
-                    gameInit();
+                    game.gameInit();
                 }
             }
         }
@@ -78,8 +77,8 @@ let ball = {
     // ball hitting bottom of canvas
     if (ball.y+ball.r > canvas.height+ball.r*2) {
         this.dy*=-1;
-        pause=true;
-        gameOver=true;
+        game.pause=true;
+        game.gameOver=true;
         drawText(2, "GAME OVER! PRESS [SPACE] TO TRY AGAIN", 300, 300, "red")
     }
 

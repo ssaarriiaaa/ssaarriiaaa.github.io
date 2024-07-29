@@ -38,9 +38,10 @@ function createBlocks(rows, cols) {
   }
   return blocks;
 }
-let rows = 1;
-let cols = 5;
-let numOfBlocks = rows*cols;
-let blocks = createBlocks(rows,cols);
 
-export {block, createBlocks, rows, cols, numOfBlocks, blocks}
+// let rows = 1;
+// let cols = 5;
+// let numOfBlocks = rows*cols;
+// let blocks = createBlocks(rows,cols);
+
+export {block, createBlocks}

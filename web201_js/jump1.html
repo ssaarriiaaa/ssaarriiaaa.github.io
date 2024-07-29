@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=1600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    //
+    window.addEventListener('keydown', (e) => {
+      console.log(e);
+      if (e.code === 'ArrowUp') {
+        ball.dy = -40;
+      }
+    });
+
+    //
+    function Ball() {
+      this.r = 5;
+      this.x = 0;
+      this.y = canvas.height - this.r;
+      this.dy = 0;
+      this.dx = 10;
+
+      this.draw = function () {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'red';
+        ctx.fill();
+      }
+
+      this.update = function () {
+        this.x += this.dx;
+        this.y += this.dy;
+
+        // change dy
+        if (this.y + this.r < canvas.height) {
+          this.dy += 4;
+        } else {
+          this.dy = 0;
+        }
+        if (this.x >= platform.x
+          && this.x <= platform.x + platform.w
+          && this.y + this.r >= platform.y) {
+          this.dy = 0;
+          this.y=platform.y-this.r;
+        }
+        if (this.x >= platform1.x
+          && this.x <= platform1.x + platform1.w
+          && this.y + this.r >= platform1.y) {
+          this.dy = 0;
+          this.y=platform1.y-this.r;
+        }
+      }
+    }
+
+    let ball = new Ball();
+    ball.draw();
+
+    function Platform(x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.draw = function () {
+        ctx.beginPath();
+        ctx.rect(this.x, this.y, this.w, this.h);
+        ctx.fillStyle = 'green';
+        ctx.fill();
+      }
+    }
+    platform = new Platform(400, 200, 200, 20);
+    platform.draw();
+    platform1=new Platform(600, 100, 200,20);
+    platform1.draw();
+
+    setInterval(function () {
+      // 1 clear
+      // ctx.clearRect(0,0,canvas.width,canvas.height);
+      // 2 draw
+      ball.draw();
+      // 3 update
+      ball.update();
+    }, 100);
+
+  </script>
+
+</body>
+
+</html>

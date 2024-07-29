@@ -9,7 +9,7 @@ function drawText(num,text,x,y,color) {
         ctx.textAlign="left";
         ctx.fillStyle=color;
         ctx.fillText(text,x,y);
-    } else if (num===2) {
+    } if (num===2) {
         ctx.beginPath();
         ctx.font="25px monospace";
         ctx.textBaseline="middle";
