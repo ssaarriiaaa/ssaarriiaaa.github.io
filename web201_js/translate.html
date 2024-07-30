@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    //
+    function drawRect(x,y,w,h,color) {
+      ctx.beginPath();
+      ctx.rect(x,y,w,h);
+      ctx.fillStyle=color;
+      ctx.fill();
+    }
+    
+    function drawRects() {
+      drawRect(100,100,50,30,'red');
+      drawRect(200,200,100,50,'blue');
+      drawRect(300,300,80,20,'orange');
+    }
+    drawRects();
+
+    // move all rects
+    // translate what? coordinate system
+    let translateX=20;
+
+    setInterval(function(){
+      // clear
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // draw
+      drawRects();
+      // update
+      // we don't update individual rect position
+      // instead we update canvas coordinate system
+      ctx.translate(translateX,0);
+
+    },100);
+
+
+
+  </script>
+
+</body>
+
+</html>

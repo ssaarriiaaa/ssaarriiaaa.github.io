@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=600 height=600></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    //
+    function drawBall(x, y, color) {
+      ctx.beginPath();
+      ctx.fillStyle = color;
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawBalls() {
+      drawBall(100, 100, 'red');
+      drawBall(200, 200, 'blue');
+      drawBall(300, 300, 'green');
+    }
+
+    drawBalls();
+    // scale what? scale canvas coordinate system unit
+    ctx.scale(2,1);
+    drawBalls();
+
+  </script>
+
+</body>
+
+</html>

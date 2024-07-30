@@ -28,17 +28,31 @@
 
     //
     function Ball() {
-      this.r = 5;
+      this.r = 10;
       this.x = 0;
       this.y = canvas.height - this.r;
       this.dy = 0;
       this.dx = 10;
-
+      this.accelerate = 4;
+      this.onPlatform = function (platform) {
+        if (this.x >= platform.x
+          && this.x <= platform.x + platform.w
+          && ((this.y + this.r < platform.y && this.y + this.dy >= platform.y) ||
+            this.y + this.r >= platform.y)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
       this.draw = function () {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
         ctx.fillStyle = 'red';
         ctx.fill();
+        // draw position
+        ctx.font = '20px monospace';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.y, this.x + 50, this.y);
       }
 
       this.update = function () {
@@ -47,22 +61,18 @@
 
         // change dy
         if (this.y + this.r < canvas.height) {
-          this.dy += 4;
+          this.dy += this.accelerate;
         } else {
           this.dy = 0;
+          this.y = canvas.height - this.r;
         }
-        if (this.x >= platform.x
-          && this.x <= platform.x + platform.w
-          && this.y + this.r >= platform.y) {
-          this.dy = 0;
-          this.y=platform.y-this.r;
-        }
-        if (this.x >= platform1.x
-          && this.x <= platform1.x + platform1.w
-          && this.y + this.r >= platform1.y) {
-          this.dy = 0;
-          this.y=platform1.y-this.r;
-        }
+
+        platforms.forEach(platform => {
+          if (this.onPlatform(platform)) {
+            this.dy = 0;
+            this.y = platform.y - this.r;
+          }
+        });
       }
     }
 
@@ -82,18 +92,21 @@
       }
     }
     platform = new Platform(400, 200, 200, 20);
-    platform.draw();
-    platform1=new Platform(600, 100, 200,20);
-    platform1.draw();
+    platform1 = new Platform(600, 100, 200, 20);
+    platform2 = new Platform(800, 400, 200, 20);
+    platforms = [ platform, platform1, platform2 ];
 
     setInterval(function () {
       // 1 clear
       // ctx.clearRect(0,0,canvas.width,canvas.height);
       // 2 draw
       ball.draw();
+      platforms.forEach(platform => {
+        platform.draw();
+      })
       // 3 update
       ball.update();
-    }, 100);
+    }, 50);
 
   </script>
 
