@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=832 height=2944></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    function Sheet() {
+      this.sheet = new Image();
+      this.sheet.src = 'spritesheet_46rows_13cols_832x2944.png';
+      this.sWidth = 832 / 13; // sprite width
+      this.sHeight = 2944 / 46;
+      this.load=false;
+      this.sheet.addEventListener('load', (e)=> {
+        this.load=true;
+      });
+    }
+
+    let sheet=new Sheet();
+
+    function Character(sheet,row,numOfFrames,sWidth,sHeight) {
+      this.frame=0;
+      this.draw=function(dx,dy){
+        let x=this.frame*sWidth;
+        let y=(row-1)*sHeight;
+        ctx.drawImage(sheet, x, y, sWidth, sHeight,dx,dy, sWidth, sHeight);
+      }
+      this.update=function(){
+        this.frame++;
+        if (this.frame===numOfFrames) {
+          this.frame=0;
+        }
+      }
+    }
+    let standLeft=new Character(sheet.sheet,2,7,sheet.sWidth,sheet.sHeight);
+    let standRight=new Character(sheet.sheet,4,7,sheet.sWidth,sheet.sHeight);
+    let runLeft=new Character(sheet.sheet,36,8,sheet.sWidth,sheet.sHeight);
+    let runRight=new Character(sheet.sheet,38,8,sheet.sWidth,sheet.sHeight);
+
+    //
+    setInterval(function () {
+      // clear
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // draw
+      standLeft.draw(50,0);
+      standRight.draw(50,100);
+      runLeft.draw(50,200);
+      runRight.draw(50,300);
+
+      // update
+      standLeft.update();
+      standRight.update();
+      runLeft.update();
+      runRight.update();
+
+    }, 100);
+
+    /*
+    standLeft at row 2
+    standRight at row 4
+    runLeft at row 36
+    runRight at row 38
+    */
+  </script>
+
+
+</body>
+
+</html>

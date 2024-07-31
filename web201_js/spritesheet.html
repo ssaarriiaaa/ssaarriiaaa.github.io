@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: solid 10px #66ba66;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas' width=832 height=2944></canvas>
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    // draw sheet in canvas
+    let sheet = new Image();
+    sheet.src = 'spritesheet_46rows_13cols_832x2944.png';
+    let sWidth = 832 / 13; // sprite width
+    let sHeight = 2944 / 46;
+    let frame = 0;
+    sheet.addEventListener('load', function (e) {
+      // ctx.drawImage(sheet,0,0);
+
+
+    });
+
+    let numOfFrames = [ 7, 7, 7, 7,
+      8, 8, 8, 8,
+      9, 9, 9, 9,
+      6, 6, 6, 6,
+      13, 13, 13, 13,
+      6, 6,
+      4, 4, 4, 4,
+      5, 5, 5, 5,
+      6, 6, 6, 6,
+      8, 8, 8, 8,
+      13, 13, 13, 13,
+      6, 6, 6, 6
+    ]
+    currFrames=new Array(46).fill(0);
+    //
+    setInterval(function () {
+      // clear
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // draw
+      for (let row = 0; row < 46; row++) {
+        let x = currFrames[row] * sWidth;
+        let y = row * sHeight;
+        ctx.drawImage(sheet, x, y, sWidth, sHeight, 0, y, sWidth, sHeight);
+        ctx.font='30px monospace';
+        ctx.fillText(row, 100, y);
+      }
+
+      // update
+      for (let row = 0; row < 46; row++) {
+        currFrames[row]++;
+        if (currFrames[row] === numOfFrames[row]) {
+          currFrames[row] = 0;
+        }
+      }
+    }, 100);
+
+    /*
+    standLeft at row 2
+    standRight at row 4
+    runLeft at row 36
+    runRight at row 38
+    */
+  </script>
+
+
+</body>
+
+</html>

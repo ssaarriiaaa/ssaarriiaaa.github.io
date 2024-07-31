@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="600" height="600"></canvas>
+   
+  <script>
+   let canvas=document.querySelector('#canvas');
+   let ctx = canvas.getContext('2d');
+    // if function has 'this', it is a Constructor
+    function Sheet() {
+      // 'this' is an empty object of 'Sheet'
+      this.img = new Image();
+      this.img.src = "spritesheet_46rows_13cols_832x2944.png";
+
+      // use arrow function which doesn't have its own 'this'
+      this.img.addEventListener('load', (e)=> {
+        ctx.drawImage(this.img, 0, 0);
+      });
+    }
+    let sheet=new Sheet();
+
+  </script>
+
+</body>
+
+</html>

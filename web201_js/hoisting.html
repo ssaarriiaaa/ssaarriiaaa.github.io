@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // hoisting: before run code, js engine first scan the coe 
+    // and move all declarations to the top of curr scope
+
+    /*
+    var a;
+    var b;
+    function c() {
+      console.log('hello');
+    }
+    */
+    a = 100;
+    console.log(a);
+    var a; // delaration
+
+    //
+    b();
+    var b=function() {
+      console.log('hello');
+    };
+
+    //
+    c();
+    function c() { // declaration and definition
+      // var a;
+      console.log('hello');
+      a=100;
+      var a;
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
